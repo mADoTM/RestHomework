@@ -41,13 +41,14 @@ public class DataService {
 
         final var companies = companyDAO.all();
 
-        for(var company : companies) {
-            map.put(company, new ArrayList<Product>());
-
-            for(var product : productDAO.getProductsByCompanyId(company.id)) {
-                map.get(company).add(product);
-            }
-        }
+        companies.forEach(company -> {
+            map.put(company, new ArrayList<>());
+            productDAO
+                    .getProductsByCompanyId(company.id)
+                    .forEach(product -> map
+                            .get(company)
+                            .add(product));
+        });
 
         return map;
     }

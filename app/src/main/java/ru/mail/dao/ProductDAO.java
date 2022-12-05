@@ -1,7 +1,9 @@
 package ru.mail.dao;
 
+import generated.tables.records.ProductRecord;
 import org.jetbrains.annotations.NotNull;
 import org.jooq.Record;
+import org.jooq.RecordMapper;
 import ru.mail.Product;
 import ru.mail.common.DSLContextHelper;
 
@@ -23,13 +25,17 @@ public class ProductDAO {
                     .where(PRODUCT.COMPANY_ID.eq(companyId))
                     .fetch();
 
-            for (Record record : result) {
-                int id = record.getValue(PRODUCT.PRODUCT_ID);
-                int dbCompanyId = record.getValue(PRODUCT.COMPANY_ID);
-                String name = record.getValue(PRODUCT.NAME);
-                int count = record.getValue(PRODUCT.COUNT);
-                list.add(new Product(id, name, dbCompanyId, count));
-            }
+            list.addAll(result.map(new RecordMapper<Record, Product>() {
+                @Override
+                public @NotNull Product map(Record record) {
+                    final var boxed = (ProductRecord) record;
+                    return new Product(boxed.getProductId(),
+                            boxed.getName(),
+                            boxed.getCompanyId(),
+                            boxed.getCount());
+                }
+            }));
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -9,6 +9,7 @@ public class RestEasyLauncher {
         final var server = JettyServer.build(port);
 
         final var context = new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
+
         context.addServlet(HttpServletDispatcher.class, "/");
         context.addEventListener(new GuiceListener());
 

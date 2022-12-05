@@ -22,7 +22,6 @@ subprojects {
         implementation("org.jooq:jooq:3.17.4")
         implementation("org.jooq:jooq-codegen:3.17.4")
         implementation("org.jooq:jooq-meta:3.17.4")
-        // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
         implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
 
 
