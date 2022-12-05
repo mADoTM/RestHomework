@@ -82,7 +82,7 @@ public final class JacksonMessageBodyHandler<T> implements MessageBodyReader<T>,
         try (final PrintWriter printWriter =
                      new PrintWriter(new OutputStreamWriter(entityStream, StandardCharsets.UTF_8), true)) {
 
-            final String json = ui.getQueryParameters().containsKey(PRETTY_PRINT_PARAMETER_NAME)
+            final var json = ui.getQueryParameters().containsKey(PRETTY_PRINT_PARAMETER_NAME)
                     ? prettyObjectMapper.writeValueAsString(t)
                     : objectMapper.writeValueAsString(t);
             printWriter.write(json);

@@ -12,6 +12,8 @@ allprojects {
     }
 }
 
+val jooqVersion = "3.17.4"
+
 subprojects {
     apply(plugin = "java")
 
@@ -19,9 +21,9 @@ subprojects {
         plugin("nu.studer.jooq")
     }
     dependencies {
-        implementation("org.jooq:jooq:3.17.4")
-        implementation("org.jooq:jooq-codegen:3.17.4")
-        implementation("org.jooq:jooq-meta:3.17.4")
+        implementation("org.jooq:jooq:$jooqVersion")
+        implementation("org.jooq:jooq-codegen:$jooqVersion")
+        implementation("org.jooq:jooq-meta:$jooqVersion")
         implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
 
 

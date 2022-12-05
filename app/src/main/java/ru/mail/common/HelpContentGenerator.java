@@ -1,32 +1,17 @@
 package ru.mail.common;
 
+import java.io.IOException;
+import java.net.URL;
+
 public class HelpContentGenerator {
-    public static String getContent() {
-        return """
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Title</title>
-                </head>
-                <body>
-                    <h3>
-                        Вот тут инструкция для дяди Жени
-                        Например
-                    </h3>
-                    <h3>
-                        localhost:3466/product GET отдаёт все компании-список товаров
-                    </h3>
-                    <h3>
-                        localhost:3466/post?product_name= POST удаляет товар с переданным именем
-                    </h3>
-                    <h3>
-                        localhost:3466/company?product_name=New name product&company_name=Company new name&count=6 POST  добавляет продукт с этой компанией и количеством
-                    </h3>
-                    <h3>
-                        localhost:3466/company?company_name=Company new name GET возвращает список товаров по имени этого производителя, в случае ошибки кидает 404
-                    </h3>
-                </body>
-                </html>""";
+    public static Object getContent() {
+        try {
+            return HelpContentGenerator.class
+                    .getClassLoader()
+                    .getResource("ru.mail/index.html")
+                    .getContent();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

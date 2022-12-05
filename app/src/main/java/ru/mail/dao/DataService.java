@@ -54,7 +54,7 @@ public class DataService {
     }
 
     public @NotNull List<Product> getAllProductOfCompany(String companyName) {
-        var company = companyDAO.getByName(companyName);
+        final var company = companyDAO.getByName(companyName);
         return productDAO.getProductsByCompanyId(company.id);
     }
 

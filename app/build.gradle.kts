@@ -2,6 +2,8 @@ plugins {
     application
 }
 
+val jettyVersion = "9.4.33.v20201020"
+
 dependencies {
     implementation(project(":models"))
     implementation(project(":jooq-generated"))
@@ -15,9 +17,9 @@ dependencies {
 
 
 
-    implementation("org.eclipse.jetty:jetty-server:9.4.33.v20201020")
-    implementation("org.eclipse.jetty:jetty-servlet:9.4.33.v20201020")
-    implementation("org.eclipse.jetty:jetty-client:9.4.33.v20201020")
+    implementation("org.eclipse.jetty:jetty-server:$jettyVersion")
+    implementation("org.eclipse.jetty:jetty-servlet:$jettyVersion")
+    implementation("org.eclipse.jetty:jetty-client:$jettyVersion")
     implementation("javax.ws.rs:javax.ws.rs-api:2.1.1")
 
     implementation("org.flywaydb:flyway-core:9.8.2")

@@ -1,7 +1,10 @@
 package ru.mail.dao;
 
+import generated.tables.records.CompanyRecord;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jooq.Record;
+import org.jooq.RecordMapper;
 import ru.mail.Company;
 import ru.mail.common.DSLContextHelper;
 
@@ -42,11 +45,13 @@ public class CompanyDAO {
                     .from(COMPANY)
                     .fetch();
 
-            result.forEach(record -> {
-                int id = record.getValue(COMPANY.COMPANY_ID);
-                String companyName = record.getValue(COMPANY.NAME);
-                list.add(new Company(id, companyName));
-            });
+            list.addAll(result.map(new RecordMapper<Record, Company>() {
+                @Override
+                public Company map(Record record) {
+                    final var unboxed = (CompanyRecord) record;
+                    return new Company(unboxed.getCompanyId(), unboxed.getName());
+                }
+            }));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

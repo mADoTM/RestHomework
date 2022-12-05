@@ -15,7 +15,7 @@ import java.util.List;
 
 @Path("/product")
 public final class ProductRest {
-    private final DataService service;
+    private final @NotNull DataService service;
 
     @Inject
     public ProductRest(@NotNull DataService service) {

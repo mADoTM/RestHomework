@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public final class DSLContextHelper {
     public static @NotNull DSLContext getContext() throws SQLException {
-        Connection connection = DbConnectionHelper.getConnection();
+        final var connection = DbConnectionHelper.getConnection();
         return DSL.using(connection, SQLDialect.POSTGRES);
     }
 }
