@@ -3,7 +3,6 @@ package ru.mail.dao;
 import generated.tables.records.ProductRecord;
 import org.jetbrains.annotations.NotNull;
 import org.jooq.Record;
-import org.jooq.RecordMapper;
 import ru.mail.Product;
 import ru.mail.common.DSLContextHelper;
 
@@ -25,15 +24,12 @@ public class ProductDAO {
                     .where(PRODUCT.COMPANY_ID.eq(companyId))
                     .fetch();
 
-            list.addAll(result.map(new RecordMapper<Record, Product>() {
-                @Override
-                public @NotNull Product map(Record record) {
-                    final var boxed = (ProductRecord) record;
-                    return new Product(boxed.getProductId(),
-                            boxed.getName(),
-                            boxed.getCompanyId(),
-                            boxed.getCount());
-                }
+            list.addAll(result.map(record -> {
+                final var boxed = (ProductRecord) record;
+                return new Product(boxed.getProductId(),
+                        boxed.getName(),
+                        boxed.getCompanyId(),
+                        boxed.getCount());
             }));
 
         } catch (SQLException e) {

@@ -5,7 +5,6 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public final class DSLContextHelper {
